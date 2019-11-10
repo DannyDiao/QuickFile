@@ -1,0 +1,23 @@
+<!--pages/authorize/authorize.wxml-->
+<view wx:if="{{canIUse}}">
+  <view class='header'>
+    <image src='/images/wx_authorize.jpg'></image>
+    <view>球文件</view>
+  </view>
+  <view class='divider'>
+    <view class='divLine'></view>
+  </view>
+  <view class='content'>
+    <view>申请获取以下权限</view>
+    <text>获得你的公开信息(昵称，头像等)</text>
+  </view>
+  <van-row>
+    <van-col offset="6" span="12">
+      <van-button round='true' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserinfo">
+        授权登录
+      </van-button>
+    </van-col>
+  </van-row>
+</view>
+
+<view wx:else>请升级微信版本</view>
