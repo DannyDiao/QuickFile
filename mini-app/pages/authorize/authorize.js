@@ -23,19 +23,20 @@ Page({
               //获取用户临时code
               wx.login({
                 success: res => {
-                  console.log(res)
+                  console.log(res.code)
+                  //从数据库获取用户信息
+                  //用户已经授权过但并未绑定信息
+                  //跳转到绑定信息页面
+                  // wx.redirectTo({
+                  //   url: '/pages/bind/bind',
+                  // })
+                  //用户已经授权且已绑定信息
+                  //跳转到主页
+                  //wx.redirectTo({
+                  //  url: '/pages/index/index',
+                  //})
                 }
               })
-              //从数据库获取用户信息
-              
-              //用户已经授权过但并未绑定信息
-              wx.redirectTo({
-                url: '/pages/bind/bind',
-              })
-              //用户已经授权且已绑定信息
-              //wx.redirectTo({
-              //  url: '/pages/index/index',
-              //})
             }
           });
         }
@@ -47,14 +48,33 @@ Page({
     console.log(e.detail)
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      //插入登录的用户的相关信息到数据库
-      wx.request({
-        
-      });
-      //授权成功后，跳转进入小程序首页
-      wx.redirectTo({
-        url: '/pages/bind/bind',
+      wx.login({
+        success: res => {
+          console.log(res.code)
+          //获取openid
+          //从数据库获取用户信息
+
+          //用户已经授权过但并未绑定信息
+          //跳转到绑定信息页面
+          // wx.redirectTo({
+          //   url: '/pages/bind/bind',
+          // })
+          //用户已经授权且已绑定信息
+          //跳转到主页
+          //wx.redirectTo({
+          //  url: '/pages/index/index',
+          //})
+        }
       })
+      //授权成功后，跳转进入小程序首页
+      //判断该账号是否已绑定信息
+      //若未绑定信息
+      //跳转到绑定页面
+      // wx.redirectTo({
+      //   url: '/pages/bind/bind',
+      // })
+      //若已绑定信息
+      //跳转到主页
     } else {
       //用户按了拒绝按钮
       wx.showModal({

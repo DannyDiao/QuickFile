@@ -5,9 +5,7 @@
     "van-col": "vant-weapp/col"
   },
   "pages": [
-    "pages/authorize/authorize",
-    "pages/bind/bind",
-    "pages/index/index"
+    "pages/authorize/authorize"
   ],
   "window": {
     "backgroundTextStyle": "light",
