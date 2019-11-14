@@ -1,16 +1,12 @@
 {
-  "usingComponents": {
-    "van-button": "vant-weapp/button",
-    "van-row": "vant-weapp/row",
-    "van-col": "vant-weapp/col"
-  },
   "pages": [
-    "pages/authorize/authorize"
+    "pages/authorize/authorize",
+    "pages/bind/bind"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#bfffff",
-    "navigationBarTitleText": "球文件",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",

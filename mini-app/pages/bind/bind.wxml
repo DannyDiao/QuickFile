@@ -1,0 +1,30 @@
+<view class='header'>
+  <image src='/images/wx_authorize.jpg'></image>
+  <view>球文件</view>
+</view>
+<view class='divider'>
+  <view class='divLine'></view>
+</view>
+<form bindsubmit="formSubmit">
+  <van-field
+    name="username"
+    left-icon="user-o"
+    clearable="true"
+    label="姓名"
+    placeholder="请输入姓名"
+  />
+  <van-field
+    name="userid"
+    left-icon="idcard"
+    clearable="true"
+    label="学号"
+    placeholder="请输入学号"
+    maxlength="13"
+  />
+  <view class="button">
+    <button form-type="submit" type='primary'>
+      确认提交
+    </button>
+  </view>
+</form>
+

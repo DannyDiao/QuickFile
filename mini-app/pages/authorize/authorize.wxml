@@ -11,13 +11,11 @@
     <view>申请获取以下权限</view>
     <text>获得你的公开信息(昵称，头像等)</text>
   </view>
-  <van-row>
-    <van-col offset="6" span="12">
-      <van-button round='true' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserinfo">
-        授权登录
-      </van-button>
-    </van-col>
-  </van-row>
+  <view class="button">
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserinfo" type='primary'>
+      授权登录
+    </button>
+  </view>
 </view>
 
 <view wx:else>请升级微信版本</view>
