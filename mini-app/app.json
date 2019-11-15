@@ -3,11 +3,15 @@
     "pages/authorize/authorize",
     "pages/bind/bind"
   ],
+  "usingComponents": {
+    "mp-dialog": "miniprogram_npm/weui-miniprogram/dialog/dialog"
+  },
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#EDEDED",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#EDEDED"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

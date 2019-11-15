@@ -5,7 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showOneButtonDialog: false,
+    oneButton: [{ text: '确定' }],
+    dialogmessage: ''
+  },
 
+  tapDialogButton: function(e) {
+    this.setData({
+      showOneButtonDialog: false
+    })
+  },
+  tapOneDialogButton: function(e) {
+    this.setData({
+      showOneButtonDialog: true
+    })
   },
 
   /**
@@ -19,9 +32,15 @@ Page({
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     //判断学号和姓名是否存在
     //若不存在，返回toast提示信息
+    this.setData({
+      dialogmessage: '姓名与学号不匹配或用户不存在，\n请重新输入！'
+    })
     //若存在顺便判断是否已绑定微信
     //若已绑定，返回toast提示信息
-    //判断全部通过后，更新数据库，将用户信息与微信openid绑定
+    // this.setData({
+    //   dialogmessage: '该用户已绑定其他微信账号，\n请重新输入！'
+    // })
+    //判断全部通过后，更新数据库，将用户信息与微信openid绑定，进入主页
   },
 
   /**
