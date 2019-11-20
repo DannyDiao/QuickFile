@@ -1,0 +1,33 @@
+<view class='header'>
+  <image src='/images/wx_authorize.jpg'></image>
+  <view>球文件</view>
+</view>
+<form bindsubmit="formSubmit">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入姓名" name="username"/>
+                </view>
+            </view>
+            <view class="weui-cell ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">学号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入学号" maxlength="13" name="userid"/>
+                </view>
+            </view>
+        </view>
+  <view class="button">
+    <button form-type="submit" type='primary' bindtap="tapOneDialogButton">
+      确认提交
+    </button>
+  </view>
+</form>
+<mp-dialog title="绑定失败" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <text>{{dialogmessage}}</text>
+</mp-dialog>
+
