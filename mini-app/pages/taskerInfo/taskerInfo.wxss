@@ -1,0 +1,37 @@
+/* pages/taskerInfo/taskerInfo.wxss */
+.taskerInfo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  align-items: center;
+}
+.taskerAvatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.taskerText{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+.taskerTextStyle{
+  font-size: 15px;
+}
+.listView{
+  display: flex;
+  flex-direction: row;
+  height: 40rpx;
+  position: relative;  
+}
+.new {
+  position: absolute;
+  right: 0;
+  margin-top: 20rpx;
+}
+.textStyle {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
