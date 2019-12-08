@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/taskInfo/taskInfo",
+    "pages/taskerInfo/taskerInfo",
+    "pages/search/search",
     "pages/authorize/authorize",
     "pages/bind/bind"
   ],
