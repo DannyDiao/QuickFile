@@ -1,0 +1,19 @@
+<!--pages/taskInfo/taskInfo.wxml-->
+<view class="taskView">
+  <text class="taskName">任务名</text>
+  <view class="infoView">
+    <text>截止日期：XXXX年XX月XX日XX:XX</text>
+    <text>文件格式：XXXXXXXXXXXXX</text>
+  </view>
+  <view class="commitView">
+    <text class="commit">备注：</text>
+    <text class="commitContent">备注内容XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</text>
+  </view>
+</view>
+<view class="uploadView">
+<text class="fileName">（读取并自动显示文件名）</text>
+<view class="buttonView">
+<button plain="true" hover-class="button-hover" type="none">上传文件</button>
+<button plain="true" hover-class="button-hover">确认提交</button>
+</view>
+</view>
