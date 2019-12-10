@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diaosu.quickfile.mapper.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.diaosu.quickfile.entity.User">
+        <result column="UserID" jdbcType="VARCHAR" property="UserID"/>
+        <result column="OpenID" jdbcType="VARCHAR" property="OpenID"/>
+        <result column="UserName" jdbcType="VARCHAR" property="UserName"/>
+        <result column="AvatarUrl" jdbcType="VARCHAR" property="AvatarUrl"/>
+        <result column="PassWord" jdbcType="VARCHAR" property="PassWord"/>
+    </resultMap>
+
+    <select id="getUser" resultType="com.diaosu.quickfile.entity.User">
+        select * from User where UserID = #{UserID}
+    </select>
+</mapper>
