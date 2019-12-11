@@ -18,7 +18,7 @@
         select * from User where OpenID = #{OpenID}
     </select>
 
-    <insert id="createUser" parameterType="com.diaosu.quickfile.entity.User" useGeneratedKeys="true" keyProperty="UserID">
-        insert into User (OpenID, UserName, AvatarUrl, PassWord) VALUES (#{OpenID},#{UserName},#{AvatarUrl},#{PassWord})
+    <insert id="createUser" parameterType="com.diaosu.quickfile.entity.User">
+        insert into User (UserID,OpenID, UserName, AvatarUrl, PassWord) VALUES (#{UserID},#{OpenID},#{UserName},#{AvatarUrl},#{PassWord})
     </insert>
 </mapper>

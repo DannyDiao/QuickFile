@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * Created By Diao Su
@@ -54,7 +55,7 @@ public class UserService {
         return userMapper.getUserByOpenID(OpenID);
     }
 
-    public void createUser(User user) {
+    public void createUser(User user) throws SQLIntegrityConstraintViolationException {
         userMapper.createUser(user);
     }
 

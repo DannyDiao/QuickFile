@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  * Created By Diao Su
  * Date 2019/12/10
@@ -39,11 +41,18 @@ public class UserController {
 
     @PostMapping("/createUser")
     public ResponseEntity<String> createUser(User user) {
+        System.out.println("userid" + user.getUserID());
+        System.out.println("password" + user.getPassWord());
+        System.out.println("name" + user.getUserName());
         //先交换成OpenID
         String OpenID = userService.exchangeOpenID(user.getOpenID());
         user.setOpenID(OpenID);
-
-        userService.createUser(user);
+        System.out.println(OpenID);
+        try {
+            userService.createUser(user);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
         System.out.println(user.getUserID());
         return ResponseEntity.ok(user.getUserID());
     }
