@@ -29,4 +29,22 @@ public class TaskController {
         return taskService.getAllTaskByUserID(UserID);
     }
 
+    //通过UserID获取该用户发布的所有任务
+    @GetMapping("getAllReleaseTaskByUserID/{UserID}")
+    public List<Task> getAllReleaseTaskByUserID(@PathVariable String UserID) {
+        return taskService.getAllReleaseTaskByUserID(UserID);
+    }
+
+    //通过UserID获取发布的任务数量
+    @GetMapping("getReleaseTaskCount/{UserID}")
+    public int getReleaseTaskCount(@PathVariable String UserID) {
+        return taskService.getReleaseTaskCount(UserID);
+    }
+
+    //通过UserID获取参加的任务数量
+    @GetMapping("getJoinTaskCount/{UserID}")
+    public int getJoinTaskCount(@PathVariable String UserID) {
+        return taskService.getJoinTaskCount(UserID);
+    }
+
 }

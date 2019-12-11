@@ -13,4 +13,10 @@ import java.util.List;
 @Repository
 public interface TaskMapper {
     List<Task> getAllTaskByUserID(String UserID);
+
+    List<Task> getAllReleaseTaskByUserID(String UserID);
+
+    int getReleaseTaskCount(String UserID);
+
+    int getJoinTaskCount(String UserID);
 }
