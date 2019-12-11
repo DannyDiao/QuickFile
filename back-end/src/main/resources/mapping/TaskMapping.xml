@@ -21,11 +21,11 @@
         SELECT * FROM Task WHERE UserID = #{UserID}
     </select>
 
-    <select id="getReleaseTaskCount" resultType="com.diaosu.quickfile.entity.Task">
+    <select id="getReleaseTaskCount" resultType="INTEGER">
         SELECT COUNT(*) FROM Task WHERE UserID = #{UserID}
     </select>
 
-    <select id="getJoinTaskCount" resultType="com.diaosu.quickfile.entity.Task">
+    <select id="getJoinTaskCount" resultType="INTEGER">
         SELECT COUNT(*) FROM Task WHERE TaskID IN (SELECT TaskID FROM File WHERE UserID = #{UserID})
     </select>
 
