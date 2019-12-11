@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  * Created By Diao Su
  * Date 2019/12/10
@@ -15,5 +17,5 @@ public interface UserMapper {
 
     User getUserByOpenID(String OpenID);
 
-    void createUser(User user);
+    void createUser(User user) throws SQLIntegrityConstraintViolationException;
 }

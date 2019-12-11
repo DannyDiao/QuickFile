@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diaosu.quickfile.mapper.TaskMapper">
+
+    <resultMap id="TaskResultMap" type="com.diaosu.quickfile.entity.User">
+        <result column="TaskID" jdbcType="INTEGER" property="TaskID"/>
+        <result column="UserID" jdbcType="VARCHAR" property="UserID"/>
+        <result column="TaskName" jdbcType="VARCHAR" property="TaskName"/>
+        <result column="FileType" jdbcType="INTEGER" property="FileType"/>
+        <result column="DEADLINE" jdbcType="TIMESTAMP" property="DEADLINE"/>
+        <result column="TaskDetails" jdbcType="VARCHAR" property="TaskDetails"/>
+        <result column="TaskStatus" jdbcType="INTEGER" property="TaskStatus"/>
+
+    </resultMap>
+
+    <select id="getAllTaskByUserID" resultType="com.diaosu.quickfile.entity.Task">
+           select * from Task where TaskID in (select TaskID from File where UserID = #{UserID})
+    </select>
+
+</mapper>
