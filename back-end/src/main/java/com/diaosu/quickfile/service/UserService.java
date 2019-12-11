@@ -39,11 +39,12 @@ public class UserService {
     }
 
     public User getOpenID(String code) {
+        System.out.println("code" + code);
         //拼接GET微信服务器的URL
-        url = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
-        System.out.println(url);
+        String urlTemp = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
+        System.out.println(urlTemp);
         RestTemplate restTemplate = RestTemplateUtil.getInstance();
-        WechatOpenIDCallBack callBack = restTemplate.getForObject(url, WechatOpenIDCallBack.class);
+        WechatOpenIDCallBack callBack = restTemplate.getForObject(urlTemp, WechatOpenIDCallBack.class);
         if (callBack.getErrcode() == 0) {
             return getUserByOpenID(callBack.getOpenid());
         } else {
@@ -61,10 +62,10 @@ public class UserService {
 
     public String exchangeOpenID(String code) {
         //拼接GET微信服务器的URL
-        url = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
-        System.out.println(url);
+        String urlTemp = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
+        System.out.println(urlTemp);
         RestTemplate restTemplate = RestTemplateUtil.getInstance();
-        WechatOpenIDCallBack callBack = restTemplate.getForObject(url, WechatOpenIDCallBack.class);
+        WechatOpenIDCallBack callBack = restTemplate.getForObject(urlTemp, WechatOpenIDCallBack.class);
         if (callBack.getErrcode() == 0) {
             return callBack.getOpenid();
         } else {

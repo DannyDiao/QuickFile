@@ -14,7 +14,19 @@
     </resultMap>
 
     <select id="getAllTaskByUserID" resultType="com.diaosu.quickfile.entity.Task">
-           select * from Task where TaskID in (select TaskID from File where UserID = #{UserID})
+           SELECT * FROM Task WHERE TaskID IN (SELECT TaskID FROM File WHERE UserID = #{UserID})
+    </select>
+
+    <select id="getAllReleaseTaskByUserID" resultType="com.diaosu.quickfile.entity.Task">
+        SELECT * FROM Task WHERE UserID = #{UserID}
+    </select>
+
+    <select id="getReleaseTaskCount" resultType="com.diaosu.quickfile.entity.Task">
+        SELECT COUNT(*) FROM Task WHERE UserID = #{UserID}
+    </select>
+
+    <select id="getJoinTaskCount" resultType="com.diaosu.quickfile.entity.Task">
+        SELECT COUNT(*) FROM Task WHERE TaskID IN (SELECT TaskID FROM File WHERE UserID = #{UserID})
     </select>
 
 </mapper>

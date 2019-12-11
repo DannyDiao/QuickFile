@@ -21,4 +21,15 @@ public class TaskService {
         return taskMapper.getAllTaskByUserID(UserID);
     }
 
+    public List<Task> getAllReleaseTaskByUserID(String UserID) {
+        return taskMapper.getAllReleaseTaskByUserID(UserID);
+    }
+
+    public int getReleaseTaskCount(String UserID) {
+        return taskMapper.getReleaseTaskCount(UserID);
+    }
+
+    public int getJoinTaskCount(String UserID) {
+        return taskMapper.getJoinTaskCount(UserID);
+    }
 }

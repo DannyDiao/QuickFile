@@ -29,8 +29,9 @@ public class UserController {
     }
 
     //通过code获取用户信息
-    @GetMapping("/getOpenid/{code}")
-    public ResponseEntity<User> getOpenID(@PathVariable String code) {
+    @GetMapping(value = "/getOpenid")
+    public ResponseEntity<User> getOpenID(String code) {
+        System.out.println("code" + code);
         User responseUser = userService.getOpenID(code);
         if (responseUser != null) {
             return ResponseEntity.ok(responseUser);
@@ -44,6 +45,8 @@ public class UserController {
         System.out.println("userid" + user.getUserID());
         System.out.println("password" + user.getPassWord());
         System.out.println("name" + user.getUserName());
+        System.out.println("ava" + user.getAvatarUrl());
+        System.out.println("openid" + user.getOpenID());
         //先交换成OpenID
         String OpenID = userService.exchangeOpenID(user.getOpenID());
         user.setOpenID(OpenID);
