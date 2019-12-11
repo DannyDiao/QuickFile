@@ -7,6 +7,7 @@ import com.diaosu.quickfile.utils.RestTemplateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,7 +37,28 @@ public class UserService {
         return userMapper.getUser(UserID);
     }
 
-    public String getOpenID(String code) {
+    public User getOpenID(String code) {
+        //拼接GET微信服务器的URL
+        url = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
+        System.out.println(url);
+        RestTemplate restTemplate = RestTemplateUtil.getInstance();
+        WechatOpenIDCallBack callBack = restTemplate.getForObject(url, WechatOpenIDCallBack.class);
+        if (callBack.getErrcode() == 0) {
+            return getUserByOpenID(callBack.getOpenid());
+        } else {
+            return null;
+        }
+    }
+
+    public User getUserByOpenID(String OpenID){
+        return userMapper.getUserByOpenID(OpenID);
+    }
+
+    public void createUser(User user) {
+        userMapper.createUser(user);
+    }
+
+    public String exchangeOpenID(String code) {
         //拼接GET微信服务器的URL
         url = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";
         System.out.println(url);
@@ -45,9 +67,7 @@ public class UserService {
         if (callBack.getErrcode() == 0) {
             return callBack.getOpenid();
         } else {
-            return "Error Requesting OpenID: " + callBack.getErrmsg();
+            return null;
         }
-
-
     }
 }
