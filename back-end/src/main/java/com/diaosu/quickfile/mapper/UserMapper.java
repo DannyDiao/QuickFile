@@ -12,4 +12,8 @@ import org.springframework.stereotype.Service;
 @Repository
 public interface UserMapper {
     User getUser(String UserID);
+
+    User getUserByOpenID(String OpenID);
+
+    void createUser(User user);
 }

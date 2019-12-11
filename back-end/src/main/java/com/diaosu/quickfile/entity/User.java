@@ -11,6 +11,16 @@ public class User {
     private String UserName;
     private String AvatarUrl;
 
+    public String getPassWord() {
+        return PassWord;
+    }
+
+    public void setPassWord(String passWord) {
+        PassWord = passWord;
+    }
+
+    private String PassWord;
+
     public String generateString(){
         return UserID + OpenID + UserName + AvatarUrl;
     }
