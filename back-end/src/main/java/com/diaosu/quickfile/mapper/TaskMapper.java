@@ -19,4 +19,8 @@ public interface TaskMapper {
     int getReleaseTaskCount(String UserID);
 
     int getJoinTaskCount(String UserID);
+
+    Task getTask(String TaskID);
+
+    int createTask(Task task);
 }

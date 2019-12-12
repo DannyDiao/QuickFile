@@ -60,6 +60,10 @@ public class UserService {
         userMapper.createUser(user);
     }
 
+    public User login(String UserID, String PassWord) {
+        return userMapper.login(UserID, PassWord);
+    }
+
     public String exchangeOpenID(String code) {
         //拼接GET微信服务器的URL
         String urlTemp = url + "?appid=" + AppID + "&secret=" + AppSecret + "&js_code=" + code + "&grant_type=authorization_code";

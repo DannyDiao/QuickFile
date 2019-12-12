@@ -32,4 +32,12 @@ public class TaskService {
     public int getJoinTaskCount(String UserID) {
         return taskMapper.getJoinTaskCount(UserID);
     }
+
+    public Task getTask(String TaskID) {
+        return taskMapper.getTask(TaskID);
+    }
+
+    public int createTask(Task task) {
+        return taskMapper.createTask(task);
+    }
 }
