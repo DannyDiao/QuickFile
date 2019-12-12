@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diaosu.quickfile.mapper.FileMapper">
+
+    <resultMap id="FiltResultMap" type="com.diaosu.quickfile.entity.File">
+        <result column="FileID" jdbcType="INTEGER" property="FileID"/>
+        <result column="UserID" jdbcType="VARCHAR" property="UserID"/>
+        <result column="TaskID" jdbcType="INTEGER" property="TaskID"/>
+        <result column="FileName" jdbcType="VARCHAR" property="FileName"/>
+        <result column="FilePath" jdbcType="VARCHAR" property="FilePath"/>
+        <result column="FileType" jdbcType="INTEGER" property="FileType"/>
+        <result column="FileStatus" jdbcType="INTEGER" property="FileStatus"/>
+        <result column="SubmitDate" jdbcType="TIMESTAMP" property="FileStatus"/>
+        <result column="FileDetails" jdbcType="VARCHAR" property="FileDetails"/>
+    </resultMap>
+
+    <select id="getFile" resultType="com.diaosu.quickfile.entity.File">
+        SELECT *
+        FROM File
+        WHERE UserID = #{UserID}
+          AND TaskID = #{TaskID}
+    </select>
+
+    <insert id="createFileInDataBase" parameterType="com.diaosu.quickfile.entity.File">
+        insert into File (FileID, UserID, TaskID, FileName, FilePath, FileType,FileStatus, SubmitDate, FileDetails)
+        VALUES (#{FileID}, #{UserID}, #{TaskID}, #{FileName}, #{FilePath},#{FileType}, #{FileStatus}, #{SubmitDate}, #{FileDetails})
+    </insert>
+
+
+</mapper>

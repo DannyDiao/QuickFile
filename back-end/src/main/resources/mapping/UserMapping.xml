@@ -11,14 +11,26 @@
     </resultMap>
 
     <select id="getUser" resultType="com.diaosu.quickfile.entity.User">
-        select * from User where OpenID = #{UserID}
+        select *
+        from User
+        where UserID = #{UserID}
     </select>
 
     <select id="getUserByOpenID" resultType="com.diaosu.quickfile.entity.User">
-        select * from User where OpenID = #{OpenID}
+        select *
+        from User
+        where OpenID = #{OpenID}
     </select>
 
     <insert id="createUser" parameterType="com.diaosu.quickfile.entity.User">
-        insert into User (UserID,OpenID, UserName, AvatarUrl, PassWord) VALUES (#{UserID},#{OpenID},#{UserName},#{AvatarUrl},#{PassWord})
+        insert into User (UserID, OpenID, UserName, AvatarUrl, PassWord)
+        VALUES (#{UserID}, #{OpenID}, #{UserName}, #{AvatarUrl}, #{PassWord})
     </insert>
+
+    <select id="login" resultType="com.diaosu.quickfile.entity.User">
+        select *
+        from User
+        where UserID = #{UserID}
+          AND PassWord = #{PassWord}
+    </select>
 </mapper>

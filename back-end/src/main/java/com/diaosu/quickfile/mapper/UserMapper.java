@@ -18,4 +18,6 @@ public interface UserMapper {
     User getUserByOpenID(String OpenID);
 
     void createUser(User user) throws SQLIntegrityConstraintViolationException;
+
+    User login(String UserID, String PassWord);
 }

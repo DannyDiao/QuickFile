@@ -7,7 +7,7 @@
         <result column="UserID" jdbcType="VARCHAR" property="UserID"/>
         <result column="TaskName" jdbcType="VARCHAR" property="TaskName"/>
         <result column="FileType" jdbcType="INTEGER" property="FileType"/>
-        <result column="DEADLINE" jdbcType="TIMESTAMP" property="DEADLINE"/>
+        <result column="DeadLine" jdbcType="TIMESTAMP" property="DeadLine"/>
         <result column="TaskDetails" jdbcType="VARCHAR" property="TaskDetails"/>
         <result column="TaskStatus" jdbcType="INTEGER" property="TaskStatus"/>
 
@@ -28,5 +28,14 @@
     <select id="getJoinTaskCount" resultType="INTEGER">
         SELECT COUNT(*) FROM Task WHERE TaskID IN (SELECT TaskID FROM File WHERE UserID = #{UserID})
     </select>
+
+    <select id="getTask" resultType="com.diaosu.quickfile.entity.Task">
+        SELECT * FROM Task WHERE TaskID = #{TaskID}
+    </select>
+
+    <insert id="createTask" >
+        INSERT INTO Task (UserID, TaskName, FileType, DeadLine, TaskDetails)
+        VALUES (#{UserID}, #{TaskName}, #{FileType}, #{DeadLine}, #{TaskDetails})
+    </insert>
 
 </mapper>
