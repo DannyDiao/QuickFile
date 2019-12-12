@@ -1,4 +1,5 @@
 // pages/bind/bind.js
+let app = getApp()
 Page({
 
   /**
@@ -16,9 +17,9 @@ Page({
     })
   },
   tapOneDialogButton: function(e) {
-    this.setData({
-      showOneButtonDialog: true
-    })
+    // this.setData({
+    //   showOneButtonDialog: true
+    // })
   },
 
   /**
@@ -29,18 +30,77 @@ Page({
   },
 
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    //判断学号和姓名是否存在
-    //若不存在，返回toast提示信息
-    this.setData({
-      dialogmessage: '姓名与学号不匹配或用户不存在，\n请重新输入！'
-    })
-    //若存在顺便判断是否已绑定微信
-    //若已绑定，返回toast提示信息
-    // this.setData({
-    //   dialogmessage: '该用户已绑定其他微信账号，\n请重新输入！'
-    // })
-    //判断全部通过后，更新数据库，将用户信息与微信openid绑定，进入主页
+    let message = e.detail.value
+    console.log('form发生了submit事件，携带数据为：', message)
+    if(message.username == "" || message.userid == ""){
+      this.setData({
+        showOneButtonDialog: true,
+        dialogmessage: '姓名和学号不能为空！'
+      })
+    }else if(message.userid.length != 13){
+      this.setData({
+        showOneButtonDialog: true,
+        dialogmessage: '学号长度必须为13位！'
+      })
+    }
+    //判断密码长度是否符合要求
+    else if(message.password1.length < 10){
+      this.setData({
+        showOneButtonDialog: true,
+        dialogmessage: '密码长度太短，\n请重新输入！'
+      })
+    } else if (message.password1 != message.password2){
+      this.setData({
+        showOneButtonDialog: true,
+        dialogmessage: '密码不一致，\n请重新输入！'
+      })
+    }else{
+      wx.login({
+        success: res => {
+          console.log(res)
+          console.log(message)
+          console.log(app.globalData.avatarUrl)
+          //app.globalData.code = res.code
+          console.log(app.globalData.code)
+          wx.request({
+            url: 'http://148.70.157.68:8080/user/createUser',
+            data: {
+              OpenID: res.code,
+              UserName: message.username,
+              UserID: message.userid,
+              AvatarUrl: app.globalData.avatarUrl,
+              PassWord: message.password1
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: res => {
+              console.log(res)
+              if (res.statusCode == 500) {
+                //用户创建失败
+                this.setData({
+                  showOneButtonDialog: true,
+                  dialogmessage: '用户已存在！！！'
+                })
+              } else if (res.statusCode == 200) {
+                app.globalData.masterInfo = {
+                  avatarUrl: app.globalData.avatarUrl,
+                  openID: null,
+                  passWord: null,
+                  userID: message.userid,
+                  userName: message.username
+                }
+                //跳转到用户主页
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              }
+            }
+          })
+        }
+      })
+    }
   },
 
   /**

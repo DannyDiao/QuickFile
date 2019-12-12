@@ -4,13 +4,21 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
-		"coverView": true
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.3",
@@ -50,6 +58,62 @@
 					"id": -1,
 					"name": "bind",
 					"pathName": "pages/bind/bind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "intask",
+					"pathName": "pages/intask/intask",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mytask",
+					"pathName": "pages/mytask/mytask",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mytaskinfo",
+					"pathName": "pages/mytaskinfo/mytaskinfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "preview",
+					"pathName": "pages/preview/preview",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "taskInfo",
+					"pathName": "pages/taskInfo/taskInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "taskerInfo",
+					"pathName": "pages/taskerInfo/taskerInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
 					"scene": null
 				}
 			]

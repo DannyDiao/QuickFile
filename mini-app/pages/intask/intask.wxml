@@ -1,0 +1,52 @@
+<!--pages/intask/intask.wxml-->
+<view class="button">
+  <button bindtap="clicktosubmit">
+    <text>待提交</text>
+    <image src="{{tosubmit_image}}"></image>
+  </button>
+  <view wx:if="{{showtosubmit}}" class="weui-cells weui-cells_after-title">
+    <navigator wx:for="{{tosubmit}}" wx:key="taskid" bindtap="onclick" data-taskid="{{item.taskid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.taskname}}</view>
+        <view class="weui-media-box__desc">
+          <text>发起人：{{item.taskowner}}\n截止日期：{{item.deadline}}</text>
+        </view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>
+<view class="button">
+  <button bindtap="clickchecking">
+    <text>审核中</text>
+    <image src="{{checking_image}}"></image>
+  </button>
+  <view wx:if="{{showchecking}}" class="weui-cells weui-cells_after-title">
+    <navigator wx:for="{{checking}}" bindtap="onclick" data-taskid="{{item.taskid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.taskname}}</view>
+        <view class="weui-media-box__desc">
+          <text>发起人：{{item.taskowner}}\n截止日期：{{item.deadline}}</text>
+        </view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>
+<view class="button">
+  <button bindtap="clickcomplete">
+    <text>已完成</text>
+    <image src="{{complete_image}}"></image>
+  </button>
+  <view wx:if="{{showcomplete}}" class="weui-cells weui-cells_after-title">
+    <navigator wx:for="{{complete}}" bindtap="onclick" data-taskid="{{item.taskid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.taskname}}</view>
+        <view class="weui-media-box__desc">
+          <text>发起人：{{item.taskowner}}\n截止日期：{{item.deadline}}</text>
+        </view>
+      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>

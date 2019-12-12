@@ -1,4 +1,5 @@
 // pages/authorize/authorize.js
+let app = getApp()
 Page({
 
   /**
@@ -20,23 +21,9 @@ Page({
           wx.getUserInfo({
             success: res => {
               console.log(res)
-              //获取用户临时code
-              wx.login({
-                success: res => {
-                  console.log(res.code)
-                  //从数据库获取用户信息
-                  //用户已经授权过但并未绑定信息
-                  //跳转到绑定信息页面
-                  // wx.redirectTo({
-                  //   url: '/pages/bind/bind',
-                  // })
-                  //用户已经授权且已绑定信息
-                  //跳转到主页
-                  //wx.redirectTo({
-                  //  url: '/pages/index/index',
-                  //})
-                }
-              })
+              //存储用户头像
+              app.globalData.avatarUrl = res.userInfo.avatarUrl
+              this.userLogin()
             }
           });
         }
@@ -48,33 +35,9 @@ Page({
     console.log(e.detail)
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      wx.login({
-        success: res => {
-          console.log(res.code)
-          //获取openid
-          //从数据库获取用户信息
-
-          //用户已经授权过但并未绑定信息
-          //跳转到绑定信息页面
-          // wx.redirectTo({
-          //   url: '/pages/bind/bind',
-          // })
-          //用户已经授权且已绑定信息
-          //跳转到主页
-          //wx.redirectTo({
-          //  url: '/pages/index/index',
-          //})
-        }
-      })
-      //授权成功后，跳转进入小程序首页
-      //判断该账号是否已绑定信息
-      //若未绑定信息
-      //跳转到绑定页面
-      // wx.redirectTo({
-      //   url: '/pages/bind/bind',
-      // })
-      //若已绑定信息
-      //跳转到主页
+      //存储用户头像
+      app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
+      this.userLogin()
     } else {
       //用户按了拒绝按钮
       wx.showModal({
@@ -90,6 +53,40 @@ Page({
       })
     }
   },
+
+  userLogin: function() {
+    //获取用户临时code
+    wx.login({
+      success: res => {
+        console.log(res)
+        //查询该微信是否已经绑定账号
+        wx.request({
+          url: 'http://148.70.157.68:8080/user/getOpenid',
+          data: {
+            code: res.code
+          },
+          success: res => {
+            console.log(res)
+            if (res.statusCode == 404) {
+              //跳转到绑定信息页面
+              wx.redirectTo({
+                url: '/pages/bind/bind',
+              })
+            } else if (res.statusCode == 200) {
+              //微信已绑定账号，返回用户信息,保存在全局变量materInfo
+              app.globalData.masterInfo = res.data
+              //跳转到用户主页
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+              console.log(app.globalData.masterInfo)
+            }
+          }
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

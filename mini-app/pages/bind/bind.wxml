@@ -20,6 +20,22 @@
                     <input class="weui-input" placeholder="请输入学号" maxlength="13" name="userid"/>
                 </view>
             </view>
+            <view class="weui-cell ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入密码（10-20个字符）" maxlength="20" name="password1" password="true"/>
+                </view>
+            </view>
+            <view class="weui-cell ">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">确认密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请再次输入密码" maxlength="20" name="password2" password="true"/>
+                </view>
+            </view>
         </view>
   <view class="button">
     <button form-type="submit" type='primary' bindtap="tapOneDialogButton">

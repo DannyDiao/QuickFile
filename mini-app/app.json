@@ -1,7 +1,15 @@
 {
   "pages": [
     "pages/authorize/authorize",
-    "pages/bind/bind"
+    "pages/bind/bind",
+    "pages/index/index",
+    "pages/intask/intask",
+    "pages/mytask/mytask",
+    "pages/mytaskinfo/mytaskinfo",
+    "pages/preview/preview",
+    "pages/taskInfo/taskInfo",
+    "pages/taskerInfo/taskerInfo",
+    "pages/search/search"
   ],
   "usingComponents": {
     "mp-dialog": "miniprogram_npm/weui-miniprogram/dialog/dialog"
@@ -12,6 +20,28 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#EDEDED"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./images/index.png",
+        "selectedIconPath": "./images/index_fill.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/intask/intask",
+        "iconPath": "./images/intask.png",
+        "selectedIconPath": "./images/intask_fill.png",
+        "text": "已参加"
+      },
+      {
+        "pagePath": "pages/mytask/mytask",
+        "iconPath": "./images/mytask.png",
+        "selectedIconPath": "./images/mytask_fill.png",
+        "text": "已发布"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
