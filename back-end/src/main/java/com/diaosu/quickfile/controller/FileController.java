@@ -46,7 +46,7 @@ public class FileController {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("failed");
             }
-            return ResponseEntity.ok(filePath.getPath());
+            return ResponseEntity.ok(name);
 
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("failed");
