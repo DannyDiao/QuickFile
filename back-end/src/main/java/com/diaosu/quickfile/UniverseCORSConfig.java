@@ -1,5 +1,6 @@
 package com.diaosu.quickfile;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -8,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Date 2019/12/12
  * diaosu@diaosudev.cn
  */
+
+@Configuration
 public class UniverseCORSConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
