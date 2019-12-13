@@ -1,5 +1,6 @@
 package com.diaosu.quickfile.mapper;
 
+import com.diaosu.quickfile.entity.File;
 import com.diaosu.quickfile.entity.Task;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +24,6 @@ public interface TaskMapper {
     Task getTask(String TaskID);
 
     int createTask(Task task);
+
+    List<File> getRelatedFiles(String TaskID);
 }

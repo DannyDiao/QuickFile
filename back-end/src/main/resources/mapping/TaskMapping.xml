@@ -38,4 +38,8 @@
         VALUES (#{UserID}, #{TaskName}, #{FileType}, #{DeadLine}, #{TaskDetails})
     </insert>
 
+    <select id="getRelatedFiles" resultType="com.diaosu.quickfile.entity.File">
+        SELECT * FROM File WHERE TaskID = #{TaskID}
+    </select>
+
 </mapper>

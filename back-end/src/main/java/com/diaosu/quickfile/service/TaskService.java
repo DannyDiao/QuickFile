@@ -1,5 +1,6 @@
 package com.diaosu.quickfile.service;
 
+import com.diaosu.quickfile.entity.File;
 import com.diaosu.quickfile.entity.Task;
 import com.diaosu.quickfile.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class TaskService {
 
     public int createTask(Task task) {
         return taskMapper.createTask(task);
+    }
+
+    public List<File> getRelatedFiles(String TaskID) {
+        return taskMapper.getRelatedFiles(TaskID);
     }
 }

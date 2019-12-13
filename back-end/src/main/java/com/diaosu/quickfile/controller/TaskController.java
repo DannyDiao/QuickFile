@@ -1,5 +1,6 @@
 package com.diaosu.quickfile.controller;
 
+import com.diaosu.quickfile.entity.File;
 import com.diaosu.quickfile.entity.Task;
 import com.diaosu.quickfile.service.TaskService;
 import io.swagger.annotations.Api;
@@ -57,5 +58,11 @@ public class TaskController {
     @PostMapping("createTask")
     public int createTask(Task task) {
         return taskService.createTask(task);
+    }
+
+    @ApiOperation("获取所有相关文件")
+    @GetMapping("getRelatedFiles/{TaskID}")
+    public List<File> getRelatedFiles(@PathVariable String TaskID) {
+        return taskService.getRelatedFiles(TaskID);
     }
 }
