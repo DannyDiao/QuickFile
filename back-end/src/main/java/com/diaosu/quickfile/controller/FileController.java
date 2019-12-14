@@ -36,8 +36,9 @@ public class FileController {
                                              @RequestParam("TaskID") String TaskID) {
         System.out.println("name" + name);
         if (!file.isEmpty()) {
+            String[] tempSplit = name.split("\\.");
             String storePath = "/root/QuickFile/Files/";
-            String tempFileName = UserID + "_" + TaskID;
+            String tempFileName = UserID + "_" + TaskID + "." + tempSplit[tempSplit.length - 1];
             File filePath = new File(storePath, tempFileName);
             if (!filePath.getParentFile().exists()) {
                 filePath.getParentFile().mkdirs();
@@ -69,10 +70,16 @@ public class FileController {
     }
 
     @ApiOperation("更新文件状态")
-    @PostMapping("updateFileStatus")
+    @PostMapping("/updateFileStatus")
     public int updateFileStatus(@RequestParam("UserID") String UserID,
                                 @RequestParam("TaskID") String TaskID,
                                 @RequestParam("FileStatus") int FileStatus) {
         return fileService.updateFileStatus(UserID, TaskID, FileStatus);
+    }
+
+    @ApiOperation("打包任务所有文件")
+    @GetMapping("/compressFiles/{TaskID}")
+    public String compressFiles(@PathVariable String TaskID) {
+        return fileService.compressFiles(TaskID);
     }
 }

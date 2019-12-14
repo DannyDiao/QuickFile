@@ -26,4 +26,8 @@ public interface TaskMapper {
     int createTask(Task task);
 
     List<File> getRelatedFiles(String TaskID);
+
+    String TaskID2TaskName(String TaskID);
+
+
 }

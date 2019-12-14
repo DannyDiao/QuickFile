@@ -42,4 +42,8 @@
         SELECT * FROM File WHERE TaskID = #{TaskID}
     </select>
 
+    <select id="TaskID2TaskName" resultType="java.lang.String">
+        SELECT TaskName FROM Task WHERE TaskID = #{TaskID}
+    </select>
+
 </mapper>
