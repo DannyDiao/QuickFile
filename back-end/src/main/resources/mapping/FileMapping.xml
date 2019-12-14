@@ -22,13 +22,23 @@
     </select>
 
     <insert id="createFileInDataBase" parameterType="com.diaosu.quickfile.entity.File">
-        insert into File (FileID, UserID, TaskID, FileName, FilePath, FileType,FileStatus, SubmitDate, FileDetails)
+        INSERT INTO File (FileID, UserID, TaskID, FileName, FilePath, FileType,FileStatus, SubmitDate, FileDetails)
         VALUES (#{FileID}, #{UserID}, #{TaskID}, #{FileName}, #{FilePath},#{FileType}, #{FileStatus}, #{SubmitDate}, #{FileDetails})
+        ON DUPLICATE KEY UPDATE FileName = #{FileName},
+                                FilePath = #{FilePath},
+                                FileType = #{FileType},
+                                FileStatus = #{FileStatus},
+                                SubmitDate = #{SubmitDate},
+                                FileDetails = #{FileDetails}
     </insert>
 
     <update id="updateFileStatus" >
         UPDATE File SET FileStatus = #{FileStatus} WHERE UserID = #{UserID} AND TaskID = #{TaskID}
     </update>
+
+    <select id="getAllFiles" resultType="java.lang.String">
+        SELECT FilePath FROM File WHERE TaskID = #{TaskID}
+    </select>
 
 
 </mapper>

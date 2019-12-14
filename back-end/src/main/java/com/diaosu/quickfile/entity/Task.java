@@ -9,7 +9,7 @@ public class Task {
     private int TaskID;
     private String UserID;
     private String TaskName;
-    private int FileType;
+    private String FileType;
     private String DeadLine;
     private String TaskDetails;
 
@@ -37,11 +37,11 @@ public class Task {
         TaskName = taskName;
     }
 
-    public int getFileType() {
+    public String getFileType() {
         return FileType;
     }
 
-    public void setFileType(int fileType) {
+    public void setFileType(String fileType) {
         FileType = fileType;
     }
 

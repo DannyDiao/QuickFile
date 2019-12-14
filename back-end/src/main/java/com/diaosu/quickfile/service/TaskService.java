@@ -45,4 +45,8 @@ public class TaskService {
     public List<File> getRelatedFiles(String TaskID) {
         return taskMapper.getRelatedFiles(TaskID);
     }
+
+    public String TaskID2TaskName(String TaskID) {
+        return taskMapper.TaskID2TaskName(TaskID);
+    }
 }
