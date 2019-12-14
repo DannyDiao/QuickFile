@@ -6,7 +6,7 @@
         <result column="TaskID" jdbcType="INTEGER" property="TaskID"/>
         <result column="UserID" jdbcType="VARCHAR" property="UserID"/>
         <result column="TaskName" jdbcType="VARCHAR" property="TaskName"/>
-        <result column="FileType" jdbcType="INTEGER" property="FileType"/>
+        <result column="FileType" jdbcType="VARCHAR" property="FileType"/>
         <result column="DeadLine" jdbcType="TIMESTAMP" property="DeadLine"/>
         <result column="TaskDetails" jdbcType="VARCHAR" property="TaskDetails"/>
         <result column="TaskStatus" jdbcType="INTEGER" property="TaskStatus"/>

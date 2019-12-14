@@ -13,4 +13,6 @@ public interface FileMapper {
     File getFile(String UserID, String TaskID);
 
     int createFileInDataBase(File file);
+
+    int updateFileStatus(String UserID, String TaskID, int FileStatus);
 }
