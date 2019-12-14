@@ -35,6 +35,7 @@ App({
   },
   globalData: {
     masterInfo: null,
-    avatarUrl: null
+    avatarUrl: null,
+    fileTypeArray: ['无', 'doc', 'jpg', 'xls', 'pdf', 'ppt']
   }
 })

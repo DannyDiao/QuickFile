@@ -1,0 +1,23 @@
+<!--pages/fileInfo/fileInfo.wxml-->
+<view class="taskView">
+  <text class="taskName">{{fileInfo.fileName}}</text>
+  <view class='divider'>
+    <view class='divLine'></view>
+  </view>
+  <view class="infoView">
+    <text>提交者：{{fileInfo.ownerName}}</text>
+    <text>文件格式：{{fileInfo.fileType}}</text>
+    <text>截止日期：{{fileInfo.submitDate}}</text>
+  </view>
+  <scroll-view class="commitView">
+    <text decode="true" class="commitContent">备注：\n&emsp;&emsp;{{fileInfo.fileDetails}}</text>
+  </scroll-view>
+</view>
+  <view class="button-sp-area">
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="preview">预览</button>
+    <button class="weui-btn mini-btn" type="default" size="mini" bindtap="pass">通过</button>
+    <button class="weui-btn mini-btn" type="warn" size="mini" bindtap="reject">驳回</button>
+  </view>
+  <mp-dialog show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <text>{{dialogmessage}}</text>
+</mp-dialog>

@@ -6,13 +6,15 @@
     "pages/intask/intask",
     "pages/mytask/mytask",
     "pages/mytaskinfo/mytaskinfo",
-    "pages/preview/preview",
     "pages/taskInfo/taskInfo",
     "pages/taskerInfo/taskerInfo",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/createTask/createTask",
+    "pages/fileInfo/fileInfo"
   ],
   "usingComponents": {
-    "mp-dialog": "miniprogram_npm/weui-miniprogram/dialog/dialog"
+    "mp-dialog": "miniprogram_npm/weui-miniprogram/dialog/dialog",
+    "mp-searchbar": "miniprogram_npm/weui-miniprogram/searchbar/searchbar"
   },
   "window": {
     "backgroundTextStyle": "dark",

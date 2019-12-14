@@ -16,11 +16,6 @@ Page({
       showOneButtonDialog: false
     })
   },
-  tapOneDialogButton: function(e) {
-    // this.setData({
-    //   showOneButtonDialog: true
-    // })
-  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -63,7 +58,7 @@ Page({
           //app.globalData.code = res.code
           console.log(app.globalData.code)
           wx.request({
-            url: 'http://148.70.157.68:8080/user/createUser',
+            url: 'https://diaosudev.cn/user/createUser',
             data: {
               OpenID: res.code,
               UserName: message.username,

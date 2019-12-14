@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.3",
+	"libVersion": "2.9.4",
 	"appid": "wxed4d3801c1847135",
 	"projectname": "mini-app",
 	"debugOptions": {
@@ -91,13 +91,6 @@
 				},
 				{
 					"id": -1,
-					"name": "preview",
-					"pathName": "pages/preview/preview",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "taskInfo",
 					"pathName": "pages/taskInfo/taskInfo",
 					"query": "",
@@ -114,6 +107,21 @@
 					"id": -1,
 					"name": "search",
 					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "createTask",
+					"pathName": "pages/createTask/createTask",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "fileInfo",
+					"pathName": "pages/fileInfo/fileInfo",
+					"query": "",
 					"scene": null
 				}
 			]

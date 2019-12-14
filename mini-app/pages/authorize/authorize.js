@@ -61,7 +61,7 @@ Page({
         console.log(res)
         //查询该微信是否已经绑定账号
         wx.request({
-          url: 'http://148.70.157.68:8080/user/getOpenid',
+          url: 'https://diaosudev.cn/user/getOpenid',
           data: {
             code: res.code
           },

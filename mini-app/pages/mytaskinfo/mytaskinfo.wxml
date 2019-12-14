@@ -1,34 +1,17 @@
 <!--pages/mytaskinfo/mytaskinfo.wxml-->
-<view class="info">
-  <view class="weui-flex">
-    <view class="weui-flex__item"><view class="taskname"><text>任务名称</text></view></view>
-  </view>
+
+<view class="taskView">
+  <text class="taskName">{{taskInfo.taskName}}</text>
   <view class='divider'>
     <view class='divLine'></view>
   </view>
-  <view class="weui-panel__bd">
-    <view class="weui-media-box weui-media-box_text">
-      <view class="weui-media-box__title weui-media-box__title_in-text">详情</view>
-      <view class="weui-media-box__desc"><text decode="true">&emsp;&emsp;{{taskinfo}}</text></view>
-    </view>
+  <view class="infoView">
+    <text>文件格式：{{taskInfo.fileType}}</text>
+    <text>截止日期：{{taskInfo.deadLine}}</text>
   </view>
-  <view class='divider'>
-    <view class='divLine'></view>
-  </view>
-  <view class="weui-flex">
-    <view class="weui-flex__item"><view class="placeholder"></view></view>
-    <view class="weui-flex__item"><view class="placeholder"></view></view>
-    <view class="weui-flex__item"><text style="font-size:28rpx;color:gray;">文件格式：{{filetype}}</text></view>
-  </view>
-  <view class='divider'>
-    <view class='divLine'></view>
-  </view>
-  <view class="weui-flex">
-    <view class="weui-flex__item"><view class="placeholder"></view></view>
-    <view class="weui-flex__item"><view class="placeholder"></view></view>
-    <view class="weui-flex__item"><text decode="true" style="font-size:28rpx;color:red;">截止日期：\n&emsp;&emsp;{{deadline}}</text></view>
-  </view>
-  <view style="height:10rpx"></view>
+  <scroll-view class="commitView">
+    <text decode="true" class="commitContent">备注：\n&emsp;&emsp;{{taskInfo.taskDetails}}</text>
+  </scroll-view>
 </view>
 <view class="button">
   <button bindtap="clickforcheck">
@@ -36,22 +19,18 @@
     <image src="{{forcheck_image}}"></image>
   </button>
   <view wx:if="{{showforcheck}}" class="weui-cells weui-cells_after-title">
-    <view wx:for="{{forcheckfile}}"  class="weui-cell weui-cell_access" >
+    <navigator wx:for="{{forcheckfile}}" class="weui-cell weui-cell_access" bindtap="onclick" data-userid="{{item.userID}}" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
-        <image src="{{item.ownerava}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
+        <image src="{{item.avatarUrl}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
       </view>
       <view class="weui-cell__bd">
-        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.filename}}</view>
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.fileName}}</view>
         <view class="weui-media-box__desc">
-          <text>发起人：{{item.fileowner}}\n提交日期：{{item.submittime}}</text>
-          <view class="button2">
-            <button type="primary" bindtap="pass" data-taskid="{{item.fileid}}">通过</button>
-            <button type="warn" bindtap="reject" data-taskid="{{item.fileid}}">驳回</button>
-          </view>
+          <text>提交者：{{item.ownerName}}\n提交日期：{{item.submitDate}}</text>
         </view>
       </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access" bindtap="onclick" data-taskid="{{item.fileid}}"><text style="font-size:28rpx">预览</text></view>
-    </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
   </view>
 </view>
 <view class="button">
@@ -60,17 +39,16 @@
     <image src="{{reject_image}}"></image>
   </button>
   <view wx:if="{{showreject}}" class="weui-cells weui-cells_after-title">
-    <navigator wx:for="{{rejectfile}}" bindtap="onclick" data-taskid="{{item.fileid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator wx:for="{{rejectfile}}" class="weui-cell weui-cell_access" hover-class="none">
       <view class="weui-cell__hd">
-        <image src="{{item.ownerava}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
+        <image src="{{item.avatarUrl}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
       </view>
       <view class="weui-cell__bd">
-        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.filename}}</view>
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.fileName}}</view>
         <view class="weui-media-box__desc">
-          <text>发起人：{{item.fileowner}}\n提交日期：{{item.submittime}}</text>
+          <text>提交者：{{item.ownerName}}\n提交日期：{{item.submitDate}}</text>
         </view>
       </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
   </view>
 </view>
@@ -80,17 +58,19 @@
     <image src="{{passed_image}}"></image>
   </button>
   <view wx:if="{{showpassed}}" class="weui-cells weui-cells_after-title">
-    <navigator wx:for="{{passedfile}}" bindtap="onclick" data-taskid="{{item.fileid}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator wx:for="{{passedfile}}" class="weui-cell weui-cell_access" hover-class="none">
       <view class="weui-cell__hd">
-        <image src="{{item.ownerava}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
+        <image src="{{item.avatarUrl}}" style="margin-right: 30rpx;vertical-align: middle;width:100rpx; height: 100rpx; border-radius: 50rpx"></image>
       </view>
       <view class="weui-cell__bd">
-        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.filename}}</view>
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{item.fileName}}</view>
         <view class="weui-media-box__desc">
-          <text>发起人：{{item.fileowner}}\n提交日期：{{item.submittime}}</text>
+          <text>提交者：{{item.ownerName}}\n提交日期：{{item.submitDate}}</text>
         </view>
       </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
+    <view wx:if="{{showdownload}}" class="download">
+      <button type="primary" bindtap="downloadfiles">打包下载</button>
+    </view>
   </view>
 </view>

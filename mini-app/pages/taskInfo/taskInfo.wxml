@@ -1,19 +1,41 @@
 <!--pages/taskInfo/taskInfo.wxml-->
 <view class="taskView">
-  <text class="taskName">任务名</text>
+  <text class="taskName">{{taskInfo.taskName}}</text>
   <view class="infoView">
-    <text>截止日期：XXXX年XX月XX日XX:XX</text>
-    <text>文件格式：XXXXXXXXXXXXX</text>
+    <text>发起人：{{taskerName}}</text>
+    <text>文件格式：{{taskInfo.fileType}}</text>
+    <text>截止日期：{{taskInfo.deadLine}}</text>
   </view>
-  <view class="commitView">
-    <text class="commit">备注：</text>
-    <text class="commitContent">备注内容XXXXXXXX</text>
+  <scroll-view class="commitView">
+    <text decode="true" class="commitContent">备注：\n&emsp;&emsp;{{taskInfo.taskDetails}}</text>
+  </scroll-view>
+</view>
+<form bindsubmit="formSubmit" class="form">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell " bindtap="selectfile">
+      <view class="weui-cell__hd">
+        <view class="weui-label">添加文件</view>
+      </view>
+      <view class="weui-cell__bd">
+        <text class="fileName">{{filename}}</text>
+      </view>
+    </view>
+    <view class="weui-cell ">
+      <view class="weui-cell__hd">
+        <view class="weui-label">添加备注</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input name="filedetails" class="weui-input" placeholder="选填" maxlength="100" />
+      </view>
+    </view>
   </view>
-</view>
-<view class="uploadView">
-<text class="fileName" bindtap="selectfile">{{filename}}</text>
-<view class="buttonView">
-<button plain="true" hover-class="button-hover" type="none">上传文件</button>
-<button plain="true" hover-class="button-hover">确认提交</button>
-</view>
-</view>
+  <view class="button">
+    <button form-type="submit" type="primary">确认提交</button>
+  </view>
+</form>
+<mp-dialog title="{{dialogtitle}}" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <text>{{dialogmessage}}</text>
+</mp-dialog>
+<mp-dialog show="{{showOneButtonDialog1}}" bindbuttontap="tapDialogButton1" buttons="{{oneButton}}">
+  <text>{{dialogmessage1}}</text>
+</mp-dialog>

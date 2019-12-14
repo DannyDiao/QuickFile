@@ -1,4 +1,4 @@
-/* pages/taskInfo/taskInfo.wxss */
+/* pages/fileInfo/fileInfo.wxss */
 .taskView {
   display: flex;
   flex-direction: column;
@@ -27,12 +27,26 @@
   margin: 20rpx;
   word-break: break-all;
 }
-.fileName{
-  color: gray;
+
+.divLine{
+  background: rgb(215, 216, 212);
+  width: 98%;
+  height: 2rpx;
 }
-.button{
-  margin-top: 40rpx;
+
+.divider{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20rpx;
 }
-.form{
-  margin-top: 80rpx;
+
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    text-align:center;
+}
+.mini-btn{
+    margin: 0 4px;
 }

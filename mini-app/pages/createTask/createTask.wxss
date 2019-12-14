@@ -1,0 +1,6 @@
+/* pages/createTask/createTask.wxss */
+page,.page{height:100%;}
+.createtask{
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+}

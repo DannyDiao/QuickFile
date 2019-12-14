@@ -9,51 +9,53 @@ Page({
     tosubmit_image: "/images/arrow-up.png",
     checking_image: "/images/arrow-down.png",
     complete_image: "/images/arrow-down.png",
+    over_image: "/images/arrow-down.png",
     showtosubmit: true,
     showchecking: false,
     showcomplete: false,
+    showover: false,
     //待提交的任务，按截止日期排序，从后端获取
-    tosubmit: [
-      { taskid: "1", taskname: "任务1", taskowner: "发起人1", deadline: "截止日期1" },
-      { taskid: "2", taskname: "任务2", taskowner: "发起人2", deadline: "截止日期2" },
-      { taskid: "3", taskname: "任务3", taskowner: "发起人3", deadline: "截止日期3" }
-    ],
+    tosubmit: [],
     //已提交等待审核的任务
-    checking: [
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" },
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" },
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" }
-    ],
+    checking: [],
     //已完成的任务
-    complete: [
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" },
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" },
-      { taskid: "id", taskname: "任务名称", taskowner: "发起人", deadline: "截止日期" }
-    ]
+    complete: [],
+    //已截止的任务
+    overtasks: []
   },
 
-  onclick: function(e){
+  onclick: function(e) {
     console.log(e.currentTarget.dataset.taskid)
     //获取任务id后传值跳转到文件上传页面
+    let taskid = e.currentTarget.dataset.taskid
+    wx.navigateTo({
+      url: '../taskInfo/taskInfo?taskID='+taskid,
+      success: res => {
+        console.log(res)
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
   },
 
-  clicktosubmit: function(e){
+  clicktosubmit: function(e) {
     console.log(e)
-    if (this.data.showtosubmit){
+    if (this.data.showtosubmit) {
       this.setData({
         showtosubmit: false,
         tosubmit_image: "/images/arrow-down.png"
       })
-    }else{
+    } else {
       this.setData({
-         showtosubmit: true,
+        showtosubmit: true,
         tosubmit_image: "/images/arrow-up.png"
       })
     }
     console.log(this.data.showtosubmit)
   },
 
-  clickchecking: function(e){
+  clickchecking: function(e) {
     console.log(e)
     if (this.data.showchecking) {
       this.setData({
@@ -69,7 +71,7 @@ Page({
     console.log(this.data.showchecking)
   },
 
-  clickcomplete: function(e){
+  clickcomplete: function(e) {
     console.log(e)
     if (this.data.showcomplete) {
       this.setData({
@@ -85,11 +87,26 @@ Page({
     console.log(this.data.showcomplete)
   },
 
+  clickover: function (e) {
+    console.log(e)
+    if (this.data.showover) {
+      this.setData({
+        showover: false,
+        over_image: "/images/arrow-down.png"
+      })
+    } else {
+      this.setData({
+        showover: true,
+        over_image: "/images/arrow-up.png"
+      })
+    }
+    console.log(this.data.showover)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    //重新刷新页面
+  onLoad: function(options) {
     this.setData({
       tosubmit_image: "/images/arrow-up.png",
       checking_image: "/images/arrow-down.png",
@@ -98,81 +115,130 @@ Page({
       showchecking: false,
       showcomplete: false
     })
-    //从后端获取任务信息，然后赋值给data
-    let masterInfo = app.globalData.masterInfo
-    //获取发布的任务列表
-    wx.request({
-      url: 'http://148.70.157.68:8080/task/getAllReleaseTask/' + masterInfo.userID,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: res => {
-        console.log(res.data)
-        
-      }
-    })
-    //获取参加的任务列表
-    wx.request({
-      url: 'http://148.70.157.68:8080/task/getAllTask/' + masterInfo.userID,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: res => {
-        console.log(res.data)
-
-      }
-    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     //隐藏返回第一个页面按钮
     wx.hideHomeButton()
-    //返回后重新加载页面
-    this.onLoad()
+    //从后端获取任务信息，然后赋值给data
+    let masterInfo = app.globalData.masterInfo
+    //获取参加的任务列表
+    wx.request({
+      url: 'https://diaosudev.cn/task/getAllTask/' + masterInfo.userID,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: res => {
+        console.log(res.data)
+        let taskdata = res.data
+        let toSubmit = []
+        let Checking = []
+        let Complete = []
+        let overTasks = []
+        this.setData({
+          tosubmit: [],
+          checking: [],
+          complete: [],
+          overtasks: []
+        })
+        for (let i = 0; i < taskdata.length; i++) {
+          //增加发起人姓名字段taskerName
+          wx.request({
+            url: 'https://diaosudev.cn/user/getuser/' + taskdata[i].userID,
+            header: {
+              'content-type': 'application/json'
+            },
+            success: res => {
+              console.log(res.data)
+              taskdata[i].taskerName = res.data.userName
+              //获取用户在该任务提交的文件状态
+              wx.request({
+                url: 'https://diaosudev.cn/file/getFile/' + masterInfo.userID + '/' + taskdata[i].taskID,
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: res => {
+                  console.log(res.data)
+                  if (taskdata[i].taskStatus == 0){
+                    overTasks.push(taskdata[i])
+                    this.setData({
+                      overtasks: overTasks
+                    })
+                  }else {
+                    //文件状态为0，表示文件被驳回，处于待提交状态，需点击任务重新提交
+                    if (res.data.fileStatus == 0) {
+                      toSubmit.push(taskdata[i])
+                      this.setData({
+                        tosubmit: toSubmit
+                      })
+                    }
+                    //文件状态为1，表示文件提交后处于审核状态，不可点击
+                    if (res.data.fileStatus == 1) {
+                      Checking.push(taskdata[i])
+                      this.setData({
+                        checking: Checking
+                      })
+                    }
+                    //文件状态为2，表示文件提交后处于审核通过，不可点击
+                    if (res.data.fileStatus == 2) {
+                      Complete.push(taskdata[i])
+                      this.setData({
+                        complete: Complete
+                      })
+                    }
+                  }
+                }
+              })
+            }
+          })
+          
+        }
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
