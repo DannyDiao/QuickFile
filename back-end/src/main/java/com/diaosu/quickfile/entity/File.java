@@ -13,7 +13,7 @@ public class File {
     private int TaskID;
     private String FileName;
     private String FilePath;
-    private int FileType;
+    private String FileType;
     private int FileStatus;
     private Timestamp SubmitDate;
 
@@ -57,11 +57,11 @@ public class File {
         FilePath = filePath;
     }
 
-    public int getFileType() {
+    public String getFileType() {
         return FileType;
     }
 
-    public void setFileType(int fileType) {
+    public void setFileType(String fileType) {
         FileType = fileType;
     }
 

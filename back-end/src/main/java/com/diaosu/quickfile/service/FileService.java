@@ -29,4 +29,8 @@ public class FileService {
         file.setSubmitDate(timestamp);
         return fileMapper.createFileInDataBase(file);
     }
+
+    public int updateFileStatus(String UserID, String TaskID, int FileStatus) {
+        return fileMapper.updateFileStatus(UserID, TaskID, FileStatus);
+    }
 }

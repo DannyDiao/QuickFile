@@ -8,7 +8,7 @@
         <result column="TaskID" jdbcType="INTEGER" property="TaskID"/>
         <result column="FileName" jdbcType="VARCHAR" property="FileName"/>
         <result column="FilePath" jdbcType="VARCHAR" property="FilePath"/>
-        <result column="FileType" jdbcType="INTEGER" property="FileType"/>
+        <result column="FileType" jdbcType="VARCHAR" property="FileType"/>
         <result column="FileStatus" jdbcType="INTEGER" property="FileStatus"/>
         <result column="SubmitDate" jdbcType="TIMESTAMP" property="FileStatus"/>
         <result column="FileDetails" jdbcType="VARCHAR" property="FileDetails"/>
@@ -25,6 +25,10 @@
         insert into File (FileID, UserID, TaskID, FileName, FilePath, FileType,FileStatus, SubmitDate, FileDetails)
         VALUES (#{FileID}, #{UserID}, #{TaskID}, #{FileName}, #{FilePath},#{FileType}, #{FileStatus}, #{SubmitDate}, #{FileDetails})
     </insert>
+
+    <update id="updateFileStatus" >
+        UPDATE File SET FileStatus = #{FileStatus} WHERE UserID = #{UserID} AND TaskID = #{TaskID}
+    </update>
 
 
 </mapper>

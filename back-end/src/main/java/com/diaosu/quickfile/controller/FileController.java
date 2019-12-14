@@ -31,22 +31,25 @@ public class FileController {
     @ApiOperation("上传文件")
     @PostMapping("/uploadFile")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
-                                             @RequestParam("filename") String name) {
+                                             @RequestParam("filename") String name,
+                                             @RequestParam("UserID") String UserID,
+                                             @RequestParam("TaskID") String TaskID) {
         System.out.println("name" + name);
         if (!file.isEmpty()) {
             String storePath = "/root/QuickFile/Files/";
-            File filePath = new File(storePath, name);
+            String tempFileName = UserID + "_" + TaskID;
+            File filePath = new File(storePath, tempFileName);
             if (!filePath.getParentFile().exists()) {
                 filePath.getParentFile().mkdirs();
             }
 
             try {
-                file.transferTo(new File(storePath + name));
+                file.transferTo(new File(storePath + tempFileName));
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("failed");
             }
-            return ResponseEntity.ok(name);
+            return ResponseEntity.ok(tempFileName);
 
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("failed");
@@ -65,4 +68,11 @@ public class FileController {
         return fileService.createFile(file);
     }
 
+    @ApiOperation("更新文件状态")
+    @PostMapping("updateFileStatus")
+    public int updateFileStatus(@RequestParam("UserID") String UserID,
+                                @RequestParam("TaskID") String TaskID,
+                                @RequestParam("FileStatus") int FileStatus) {
+        return fileService.updateFileStatus(UserID, TaskID, FileStatus);
+    }
 }
