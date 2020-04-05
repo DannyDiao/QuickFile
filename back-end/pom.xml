@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.diaosu</groupId>
     <artifactId>quick-file</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Quick-File</name>
     <description>Quick-File Back end.</description>
 
@@ -32,6 +32,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
