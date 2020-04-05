@@ -1,5 +1,7 @@
 package com.diaosu.quickfile.service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.diaosu.quickfile.entity.User;
 import com.diaosu.quickfile.entity.WechatOpenIDCallBack;
 import com.diaosu.quickfile.mapper.UserMapper;
@@ -75,5 +77,12 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public String generateToken(User user) {
+        String token = "";
+        token = JWT.create().withAudience(user.getUserID())
+                .sign(Algorithm.HMAC256(user.getPassWord()));
+        return token;
     }
 }
