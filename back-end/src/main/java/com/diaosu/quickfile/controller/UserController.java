@@ -1,5 +1,6 @@
 package com.diaosu.quickfile.controller;
 
+import com.diaosu.quickfile.annotations.RequiredToken;
 import com.diaosu.quickfile.entity.User;
 import com.diaosu.quickfile.service.UserService;
 import io.swagger.annotations.Api;
@@ -24,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    @RequiredToken
     @ApiOperation("通过学号获取用户信息")
     @GetMapping("/getuser/{id}")
     public User getUser(@PathVariable String id) {
@@ -50,6 +51,9 @@ public class UserController {
         System.out.println("receiver login");
         User userTemp = userService.login(UserID, PassWord);
         if (userTemp != null) {
+            //生成token
+            String token = userService.generateToken(userTemp);
+            userTemp.setToken(token);
             return ResponseEntity.ok(userTemp);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

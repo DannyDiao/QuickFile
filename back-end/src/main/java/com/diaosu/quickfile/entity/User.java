@@ -10,6 +10,7 @@ public class User {
     private String OpenID;
     private String UserName;
     private String AvatarUrl;
+    private String token;
 
     public String getPassWord() {
         return PassWord;
@@ -58,5 +59,11 @@ public class User {
     }
 
 
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
